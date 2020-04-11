@@ -1,3 +1,18 @@
+properties([
+    parameters([
+        gitParameter(branch: '',
+                     branchFilter: 'origin/(.*)',
+                     defaultValue: 'master',
+                     description: '',
+                     name: 'gh-pages',
+                     quickFilterEnabled: false,
+                     selectedValue: 'NONE',
+                     sortMode: 'NONE',
+                     tagFilter: '*',
+                     type: 'PT_BRANCH')
+    ])
+])
+
 node {
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
     def server = Artifactory.server "jfrogartifactory"
