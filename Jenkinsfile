@@ -4,11 +4,14 @@ node {
     // Create an Artifactory Maven instance.
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
+    parameters {
+    gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'gh-pages', type: 'PT_BRANCH'
+  }
     
  rtMaven.tool = "Maven"
 
     stage('Clone sources') {
-        git branch: "${gh-pages}" url: 'https://github.com/sandeeprasath/onlinebookstore.git'
+        git branch: "${params.BRANCH}" url: 'https://github.com/sandeeprasath/onlinebookstore.git'
     }
 
     stage('Artifactory configuration') {
