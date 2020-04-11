@@ -5,7 +5,7 @@ node {
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
     
- rtMaven.tool = "maven"
+ rtMaven.tool = "Maven"
 
     stage('Clone sources') {
         git url: 'https://github.com/sandeeprasath/onlinebookstore.git'
