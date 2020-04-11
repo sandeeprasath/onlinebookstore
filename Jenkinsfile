@@ -8,7 +8,7 @@ node {
  rtMaven.tool = "Maven"
 
     stage('Clone sources') {
-        git branch: "${params.*/gh-pages}" url: 'https://github.com/sandeeprasath/onlinebookstore.git'
+        git branch: "${gh-pages}" url: 'https://github.com/sandeeprasath/onlinebookstore.git'
     }
 
     stage('Artifactory configuration') {
