@@ -1,32 +1,14 @@
-properties([
-    parameters([
-        gitParameter(branch: '',
-                     branchFilter: 'origin/(.*)',
-                     defaultValue: 'master',
-                     description: '',
-                     name: 'gh-pages',
-                     quickFilterEnabled: false,
-                     selectedValue: 'NONE',
-                     sortMode: 'NONE',
-                     tagFilter: '*',
-                     type: 'PT_BRANCH')
-    ])
-])
-
 node {
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
     def server = Artifactory.server "jfrogartifactory"
     // Create an Artifactory Maven instance.
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
-    parameters {
-    gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'gh-pages', type: 'PT_BRANCH'
-  }
     
  rtMaven.tool = "Maven"
 
     stage('Clone sources') {
-        git branch: "${params.BRANCH}" url: 'https://github.com/sandeeprasath/onlinebookstore.git'
+        git url: 'https://github.com/sandeeprasath/onlinebookstore.git'
     }
 
     stage('Artifactory configuration') {
