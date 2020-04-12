@@ -4,6 +4,9 @@ node {
     // Create an Artifactory Maven instance.
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
+    tools {
+    maven 'M3'
+  }
     
  rtMaven.tool = "Maven"
     
