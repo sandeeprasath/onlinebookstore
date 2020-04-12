@@ -1,27 +1,14 @@
-pipeline {
-    agent any
-    stages{
-    stage('Build') {
-        steps{
-            echo 'Building ...'
-        }
-        post{
-            always{
-                jiraSendBuildInfo site:'dallasdevopscasestudy.atlassian.net'
-            }
-        }
-    }
-        stage('Send Email') {
-            steps {
-                def server = Artifactory.server "jfrogartifactory"
-                // Create an Artifactory Maven instance.
-                def rtMaven = Artifactory.newMavenBuild()
-                def buildInfo
+node{
+    // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
+    def server = Artifactory.server "jfrogartifactory"
+    // Create an Artifactory Maven instance.
+    def rtMaven = Artifactory.newMavenBuild()
+    def buildInfo
     
-                rtMaven.tool = "Maven"
-            
-            }
-            stage('Clone sources') {
+    rtMaven.tool = "Maven"
+    
+        
+    stage('Clone sources') {
         git url: 'https://github.com/sandeeprasath/onlinebookstore.git'
     }
     
@@ -42,8 +29,4 @@ pipeline {
         server.publishBuildInfo buildInfo
         deploy adapters: [tomcat8(credentialsId: 'tomcatserver', path: '', url: 'http://18.217.199.8:8080/')], contextPath: '/adminlog', war: '**/*.war'
     }
-        }
-        
-    }
-
 }
