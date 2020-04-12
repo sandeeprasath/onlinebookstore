@@ -8,12 +8,11 @@ node {
  rtMaven.tool = "Maven"
     
     stage("build & SonarQube analysis") {
-            agent any
-            steps {
+            node {
               withSonarQubeEnv('My SonarQube Server') {
-                sh 'mvn clean package sonar:sonar'
+                 sh 'mvn clean package sonar:sonar'
               }
-         }
+          }
     }
         
     stage('Clone sources') {
