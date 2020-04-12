@@ -1,4 +1,4 @@
-node {
+pipeline {
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
     def server = Artifactory.server "jfrogartifactory"
     // Create an Artifactory Maven instance.
@@ -21,11 +21,12 @@ node {
             }
         }
     
-    stage("build & SonarQube analysis") {
-        agent { label 'maven' }
-        steps {
-            sh 'mvn clean package sonar:sonar'
+    stage("build & SonarQube analysis") {'
+         withMaven(...) {
+            git "https://github.com/sandeeprasath/onlinebookstore.git"
+            sh "export PATH=$MVN_CMD_DIR:$PATH && mvn clean package sonar:sonar" // 'mvn' command: need to add the $MVN_CMD_DIR to $PATH
         }
+        
     }
         
     stage('Clone sources') {
