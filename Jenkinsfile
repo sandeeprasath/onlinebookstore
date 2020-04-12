@@ -9,9 +9,6 @@ node {
     
         
     stage('Clone sources') {
-        steps{
-            echo 'Building ...'
-        }
         post{
             always{
                 jiraSendBuildInfo site:'dallasdevopscasestudy.atlassian.net'
