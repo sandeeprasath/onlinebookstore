@@ -9,6 +9,14 @@ node {
     
         
     stage('Clone sources') {
+        steps{
+            echo 'Building ...'
+        }
+        post{
+            always{
+                jiraSendBuildInfo site:'dallasdevopscasestudy.atlassian.net'
+            }
+        }
         git url: 'https://github.com/sandeeprasath/onlinebookstore.git'
     }
 
@@ -21,7 +29,7 @@ node {
     }
 
     stage('Maven build') {
-        buildInfo = rtMaven.run pom: 'pom.xml', goals: 'package'
+        buildInfo = rtMaven.run pom: 'pom.xml', goals: 'package sonar:sonar'
     }
 
     stage('Publish build info') {
