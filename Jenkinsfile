@@ -22,7 +22,7 @@ node{
     }
 
     stage('Maven build') {
-        buildInfo = rtMaven.run pom: 'pom.xml', goals: 'package sonar:sonar'
+        buildInfo = rtMaven.run pom: 'pom.xml', goals: 'package'
     }
 
     stage('Publish build info') {
