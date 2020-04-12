@@ -12,7 +12,7 @@ pipeline {
         }
     }
     }
-node('test') {
+node{
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
     def server = Artifactory.server "jfrogartifactory"
     // Create an Artifactory Maven instance.
