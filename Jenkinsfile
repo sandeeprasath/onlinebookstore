@@ -12,22 +12,7 @@ pipeline {
     }
     
  rtMaven.tool = "Maven"
-    stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
-            }
-        }
     
-    stage("build & SonarQube analysis") {'
-         withMaven(...) {
-            git "https://github.com/sandeeprasath/onlinebookstore.git"
-            sh "export PATH=$MVN_CMD_DIR:$PATH && mvn clean package sonar:sonar" // 'mvn' command: need to add the $MVN_CMD_DIR to $PATH
-        }
-        
-    }
         
     stage('Clone sources') {
         git url: 'https://github.com/sandeeprasath/onlinebookstore.git'
