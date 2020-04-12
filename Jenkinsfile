@@ -13,7 +13,8 @@ node {
               withSonarQubeEnv('My SonarQube Server') {
                 sh 'mvn clean package sonar:sonar'
               }
-     }
+         }
+    }
         
     stage('Clone sources') {
         git url: 'https://github.com/sandeeprasath/onlinebookstore.git'
@@ -35,4 +36,4 @@ node {
         server.publishBuildInfo buildInfo
         deploy adapters: [tomcat8(credentialsId: 'tomcatserver', path: '', url: 'http://18.217.199.8:8080/')], contextPath: '/adminlog', war: '**/*.war'
     }
-    }
+}
