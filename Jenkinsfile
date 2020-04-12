@@ -5,7 +5,21 @@ node {
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
     
+    agent any
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
+    
  rtMaven.tool = "Maven"
+    stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
+            }
+        }
     
     stage("build & SonarQube analysis") {
         agent { label 'maven' }
