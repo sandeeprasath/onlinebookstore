@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    stages{
     stage('Build') {
         steps{
             echo 'Building ...'
@@ -9,6 +10,7 @@ pipeline {
                 jiraSendBuildInfo site:'dallasdevopscasestudy.atlassian.net'
             }
         }
+    }
     }
 node('test') {
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
