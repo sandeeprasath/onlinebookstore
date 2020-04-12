@@ -19,6 +19,17 @@ node {
         }
         git url: 'https://github.com/sandeeprasath/onlinebookstore.git'
     }
+    
+    stage('Build') {
+        steps{
+            echo 'Building ...'
+        }
+        post{
+            always{
+                jiraSendBuildInfo site:'dallasdevopscasestudy.atlassian.net'
+            }
+        }
+    }
 
     stage('Artifactory configuration') {
         // Tool name from Jenkins configuration
