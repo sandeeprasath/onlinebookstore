@@ -8,8 +8,7 @@ node {
  rtMaven.tool = "Maven"
     
     stage("build & SonarQube analysis") {
-        def mvnHome = tool name: 'Apache Maven 3.3.9', type: 'maven'
-        sh "${mvnHome}/bin/mvn -B -DskipTests clean package sonar:sonar"
+        sh "${rtMaven}/bin/mvn -B -DskipTests clean package sonar:sonar"
     }
         
     stage('Clone sources') {
