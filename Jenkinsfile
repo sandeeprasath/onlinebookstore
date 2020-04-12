@@ -5,13 +5,7 @@ node {
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
     
-    agent any
-    tools {
-        maven 'Maven 3.3.9'
-        jdk 'jdk8'
-    }
-    
- rtMaven.tool = "Maven"
+    rtMaven.tool = "Maven"
     
         
     stage('Clone sources') {
