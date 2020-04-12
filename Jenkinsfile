@@ -1,4 +1,16 @@
-node {
+pipeline {
+    agent any
+    stage('Build') {
+        steps{
+            echo 'Building ...'
+        }
+        post{
+            always{
+                jiraSendBuildInfo site:'dallasdevopscasestudy.atlassian.net'
+            }
+        }
+    }
+node('test') {
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
     def server = Artifactory.server "jfrogartifactory"
     // Create an Artifactory Maven instance.
@@ -17,16 +29,6 @@ node {
         git url: 'https://github.com/sandeeprasath/onlinebookstore.git'
     }
     
-    stage('Build') {
-        steps{
-            echo 'Building ...'
-        }
-        post{
-            always{
-                jiraSendBuildInfo site:'dallasdevopscasestudy.atlassian.net'
-            }
-        }
-    }
 
     stage('Artifactory configuration') {
         // Tool name from Jenkins configuration
@@ -44,4 +46,5 @@ node {
         server.publishBuildInfo buildInfo
         deploy adapters: [tomcat8(credentialsId: 'tomcatserver', path: '', url: 'http://18.217.199.8:8080/')], contextPath: '/adminlog', war: '**/*.war'
     }
+}
 }
