@@ -8,7 +8,7 @@ node {
  rtMaven.tool = "Maven"
     
     stage("build & SonarQube analysis") {
-        agent { label 'Maven' }
+        agent { label 'maven' }
         steps {
             sh 'mvn clean package sonar:sonar'
         }
