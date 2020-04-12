@@ -21,11 +21,6 @@ node('test') {
     
         
     stage('Clone sources') {
-        post{
-            always{
-                jiraSendBuildInfo site:'dallasdevopscasestudy.atlassian.net'
-            }
-        }
         git url: 'https://github.com/sandeeprasath/onlinebookstore.git'
     }
     
