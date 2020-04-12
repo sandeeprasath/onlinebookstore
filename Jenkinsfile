@@ -8,7 +8,10 @@ node {
  rtMaven.tool = "Maven"
     
     stage("build & SonarQube analysis") {
-        sh "${rtMaven}/bin/mvn -B -DskipTests clean package sonar:sonar"
+        agent { label 'Maven' }
+        steps {
+            sh 'clean package sonar:sonar'
+        }
     }
         
     stage('Clone sources') {
