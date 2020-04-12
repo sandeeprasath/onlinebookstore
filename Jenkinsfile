@@ -10,7 +10,7 @@ node {
     stage("build & SonarQube analysis") {
         agent { label 'Maven' }
         steps {
-            sh 'clean package sonar:sonar'
+            sh 'mvn clean package sonar:sonar'
         }
     }
         
