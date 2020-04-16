@@ -27,6 +27,6 @@ node{
 
     stage('Publish build info') {
         server.publishBuildInfo buildInfo
-        deploy adapters: [tomcat8(credentialsId: 'tomcatserver', path: '', url: 'http://18.217.199.8:8080/')], contextPath: '/adminlog', war: '**/*.war'
+        deploy adapters: [tomcat8(credentialsId: 'tomcatserver', path: '', url: 'http://18.223.118.8:8080/')], contextPath: '/adminlog', war: '**/*.war'
     }
 }
